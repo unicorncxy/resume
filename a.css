@@ -1,0 +1,306 @@
+body{
+    background: #EFEFEF;
+    margin: 0;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+}
+*{
+    margin: 0;           /*所有 边框去掉*/
+    padding: 0;
+}
+hr{
+    height: 0;
+    border: none;
+    border-top: 1px solid #dedede;           /*名片的灰白边框*/
+}
+ul,ol{
+    list-style: none;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+/*----------------------------------------以上--------------*/
+.topNavBar{
+    padding: 20px 0 20px 0;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%; 
+}
+.topNavBar-inner{
+    padding: 0 16px;
+}
+.topNavBar nav{
+    padding-top: 7px;                  /*尽量调整到和RS在同一水平线上*/
+}
+.topNavBar nav > ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.topNavBar nav > ul > li {
+    float: left;
+    margin-left: 17px;
+    margin-right: 17px;
+}
+.topNavBar nav > ul > li > a {                 /*顶部列表样式，低端红色的小条条*/
+    font-size: 12px;
+    color: #b7b7b7;
+    font-weight: bold;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+}
+.topNavBar nav > ul > li > a:hover {
+
+    border-bottom:3px solid #e06567; 
+}
+.topNavBar .logo {                            /*后代继承*/
+    font-size:24px;
+    font-family:  "Arial Black";
+    padding-top: 3px;
+    padding-bottom: 4px;
+}
+.topNavBar .logo .rs{                       /*可以写一个.topnavbar的爸爸有他俩相同的属性*/ 
+    margin-right: 4px;
+    color: #e6686a;
+}
+.topNavBar .logo .card{
+    color: #9a9da2;
+}
+.banner{
+    height: 515px;
+    background-image: url(./img/bg.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+.banner .mask{                               
+    height: 515px;
+    background-color:rgba(0, 0, 0, 0.7);       /*背景海报灰蒙蒙的高级感*/
+}
+.userCard{
+    max-width: 940px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px 0px rgba(92,92,92,0.5);
+}
+.userCard .welcome{
+    background: #e6686a;
+    color: white;
+    display: inline-block;
+    padding: 4px 16px;
+    line-height: 22px;
+    position: relative;                 /*绝对定位*/
+    margin: 40px;
+}
+.userCard .welcome .triangle{
+    display: block;                     /*把span变成div*/
+    border: 10px solid transparent;     /*用css画三角形*/
+    width: 0px;
+    border-left-color: #e6686a;
+    border-top-width: 0px;
+    position: absolute;                 /*绝对定位*/
+    left: 4px;
+    top: 100%;
+}
+.userCard .picture{
+    float: left;  
+    margin:40px;        /*头像*/
+}
+.userCard .text{
+    float: left;           /*个人描述*/
+    margin-left: 65px;
+    width: 470px;
+}
+.userCard .text h1{
+    margin-top: 18px;
+}
+.userCard .text hr{
+    margin: 20px 0;
+}
+.userCard .pictureAndtext{
+    padding: 50px;
+}
+.userCard dl dt,
+.userCard dl dd{
+    float: left;
+    padding: 5px 0;
+}
+.userCard dl dt{
+    width: 30%;
+    font-weight: bold;
+}
+.userCard dl dd{
+    width: 70%;
+    color: #9da0a7;
+}
+.userCard > footer.media{
+    background: #e6686a;
+    text-align: center;
+}
+.userCard > footer.media > a{    /*GitHub weibo weixin 红色的框框*/
+    display: inline-block;
+    width: 40px;
+    line-height: 30px;
+    padding: 5px 0;
+    border-radius: 50%;
+    margin: 16px;
+}
+.userCard > footer.media > a:hover{    /*鼠标悬停变为深红色*/
+    background: #cf5d5f;
+}
+.userCard svg{
+    width: 30px;
+    height: 30px;
+    fill: white;
+    vertical-align: top;
+}
+body> main{                      /*整个大名片向上移动340个像素*/
+    margin-top:-340px;
+}
+body>main .downloadResume-wrapper{         /*下载按钮的边框，要有阴影*/
+    text-align: center;
+}
+body> main .downloadResume{
+    font-size: 14px;
+    line-height: 16px;
+    padding: 21px 55px;
+    display: inline-block;
+    border: 1px solid #cdcfd1;
+    border-radius: 2px;
+    background: #efefef;
+    color: #3d4451;
+    font-weight: bold;
+    margin: 32px 0;
+    transition: box-shadow 0.4s;
+}
+body> main .downloadResume:hover{
+    box-shadow: 0px 5px 20px 0px rgba(92,92,92,0.2);
+}
+.selfIntroduction{            /*自我介绍部分*/
+    max-width: 940px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-family: kai;
+    line-height: 1.8;
+    font-size: 18px;
+}
+section.skills,
+section.portfolio{
+    max-width: 940px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 60px;
+}
+section.skills > h2,
+section.portfolio > h2{            /*技能*/
+    text-align: center;
+    font-size: 34px;
+    line-height: 1.2;
+    color: #3d4451;
+    font-weight: 600;
+}
+section.skills h3{            /*技能条里面各项技能*/
+    font-size: 14px;
+    line-height: 1.1;
+    padding-right: 40px;
+
+}
+section.skills>ol{    
+           
+    background-color: white;
+    padding: 42px 50px 10px ;
+    box-shadow: 0px 2px 5px 0px rgba(92,92,92,0.5);
+    margin-top: 30px;
+}
+section.skills>ol>li{
+    float: left;
+    width: 48%;
+    box-sizing: border-box;
+}
+section.skills>ol>li:nth-child(even){/*偶数的右侧的右浮*/
+    float: right;
+}
+section.skills .progressBar{       /*进度条*/
+    height: 5px;
+    background: #fae1e1;
+    border-radius: 2px;
+    margin: 4px 0 40px ;
+    
+}
+section.skills .progressBar .progress{    /*进度条里面的红色填充*/
+    background: #e6686a;
+    height: 100%;         /*继承来的高度，后来改的话可以自适应*/
+    width: 50%;
+    border-radius: 2px;
+}
+section.portfolio{
+    text-align: center;
+    margin-bottom: 100px;
+}
+section.portfolio>nav{
+    text-align: center;
+}
+section.portfolio>nav>ol{
+    margin:0 auto;
+    display: inline-block;
+    vertical-align: top;
+}
+section.portfolio>nav>ol>li{
+    float: left;
+    margin-left: 40px;
+    cursor: pointer;
+}
+section.portfolio>nav>ol>li:first-child{    /*第一个子元素“所有”前面不要距离，保证精准居中*/
+    margin-left: 0;
+}
+section.portfolio >nav{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 32px;
+}
+section.portfolio>nav.bar{  /* 作品集下面的滑动框框bar*/
+    height: 5px;
+    background: white;
+    margin-top: 5px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+
+}
+section.portfolio>nav.bar-inner{  /* bar里面的红色填充*/
+    height: 100%; 
+    background: #e6686a;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+section.portfolio>nav.bar.state-1 .bar-inner{
+    margin-left: 0;
+    width:40px;
+}
+section.portfolio>nav.bar.state-2 .bar-inner{
+    margin-left: 65px;
+    width: 60px;
+}
+section.portfolio>nav.bar.state-3 .bar-inner{
+    margin-left: 140px;
+    width:96px;
+}
+section.portfolio .works{
+    position: relative;
+}
+section.portfolio .works>.big,
+section.portfolio .works>.small
+{
+    position: absolute;
+}
