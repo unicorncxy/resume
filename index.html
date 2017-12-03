@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html >
-
 <head>
     <title>Un!corn的个人简历</title>
     <link rel="stylesheet" href="./a.css">
     <script src="//at.alicdn.com/t/font_452255_hxpoco2auaowp14i.js"></script>
     <style type="text/css">
-    .icon {
-       width: 1em; height: 1em;
-       vertical-align: -0.15em;
-       fill: currentColor;
-       overflow: hidden;
+    .loading{width:200px;height: 200px;position: relative;}
+    .loading::before,.loading::after{ content: ''; position: absolute; width: 0px; height: 0px; background: black; border-radius: 50%; top: 0; left: 0; bottom: 0; right: 0; margin: auto; animation: s 1.5s linear infinite; }
+    .loading::after{ animation-delay: 0.75s; }
+    @keyframes s{
+        0%{width:0px;height: 0px;opacity: 1;}
+        100%{width: 100px;height: 100px;opacity: 0;}
     }
+    .icon {width: 1em; height: 1em;vertical-align: -0.15em;fill: currentColor;overflow: hidden;}
+    .site-welcome{display: none;position: fixed;top:0;left: 0;width: 100%;height: 100%;background: #888;z-index:1;justify-content: center;align-items: center;}
+    .site-welcome.active{display: flex;}
 </style>
 </head>
 
 <body>   
-    <div class="topNavBar">
+    <div id="siteWelcome" class="site-welcome active">
+        <div class="loading"></div>
+    </div>
+    <div id="topNavBar" class="topNavBar">
         <div class="topNavBar-inner clearfix">       
             <a class="logo" href="#" alt="logo" style="float: left;">
             <span class="rs">RS</span>
@@ -25,16 +31,26 @@
         <nav style="float: right;">
             <ul class="clearfix">
                 <li>
-                    <a href="#">关于</a>
+                    <a href="#siteAbout">关于</a>
                 </li>
                 <li>
-                    <a href="#">技能</a>
+                    <a href="siteSkills">技能</a>
                 </li>
                 <li>
-                    <a href="#">作品</a>
+                    <a class="siteWorks" href="#"><span>作品</span></a>
+                    <ul class="submenu">
+                        <li>作品1</li>
+                        <li>作品2</li>
+                        <li>作品3</li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">博客</a>
+                    <a class="menuTigger" href="#">博客</a>
+                    <ul class="submenu">
+                        <li>博客1</li>
+                        <li>博客2</li>
+                        <li>博客3</li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">日历</a>
@@ -53,7 +69,7 @@
             <div class="mask"></div>
         </div>
         <main>
-            <div class="userCard">
+            <div id="siteAbout" class="userCard">
                 <div class="pictureAndText clearfix">
                     <div class="picture">
                         <img src="./img/a.jpg" width= 299px; height= 425px; alt="头像">
@@ -111,7 +127,7 @@
                 </p>
                 
         </main>
-        <section class="skills">
+        <section id="siteSkills" class="skills">
             <h2>技能</h2>
             <ol class="clearfix">
                 <li>
@@ -173,7 +189,7 @@
                 
             </ol>
         </section>
-        <section class="portfolio">
+        <section id="siteWorks" class="portfolio" style="padding-top:100px;">
             <h2>作品集</h2>
             <nav>
                 <ol class="clearfix">
@@ -198,22 +214,54 @@
 </script>
 
 
-            <div class="works" style="height: 597px;">
-                <div class="big" style="top:0; left:0;">
-                    <img src="./img/1.jpg" alt="作品1">
-                </div>
-            <div class="small" style="top:0; left:645px;">
-                <div class="big">
-                        <img src="./img/2.jpg" alt="作品2">
-                </div>
-            </div>
-            <div class="small" style="top:312px; left:637px;">
-                <div class="big">
-                        <img src="./img/3.jpg" alt="作品3">
-                </div>
-            </div>
-            </div>
-        </section>
-        </body>
+<div class="works" style="height: 597px;">
+    <div class="big" style="top: 0; left: 0;">
+      <img src="./img/1.jpg" alt="作品1">
+    </div>
+    <div class="small" style="top: 0; left: 645px;">
+      <img src="./img/2.jpg" alt="作品2">
+    </div>
+    <div class="small" style="top: 312px; left: 645px;">
+      <img src="./img/3.jpg" alt="作品3">
+    </div>
+  </div>
 
+        </section>
+        <script>
+        setTimeout(function(){
+            siteWelcome.classList.remove('active')
+        },1000)
+window.onscroll = function(xxxxx){
+    if(window.scrollY>0){
+        topNavBar.classList.add('sticky')
+
+    }else{
+        topNavBar.classList.remove('sticky')
+    }
+}        
+let liTags = document.querySelectorAll('nav.menu>ul>li')  //监听下拉菜单
+for(let i=0; i<aTags.length;i++){
+    liTags[i].onmouseenter = function(x){
+        x.currentTarget.classList.add('active')
+    }
+    liTags[i].onmouseleave = function(x){
+        x.currentTarget.classList.remove('active')
+    }
+}
+
+let aTags = document.querySelectorAll('nav.menu>ul>li>a')
+for(let i=0;i<aTags.length;i++){       //监听
+    aTags[i].onclick = function(x){
+        x.preventDefault()  //重点！！！阻止默认
+        let a=x.currentTarget   //获取a标签
+        let href = a.getAttribute('href')   // 获取a标签上的href  '#siteAbout'
+        let element= document.querySelector(href)   //得到元素
+         //       视口距离   let rect=element.getBoundingClientRect()
+        let top= element.offsetTop//距离页面最顶端的距离 而不是窗口顶端
+        window.scrollTo(0,top-80)   //window滑动到窗口下80像素的位置
+
+    }
+}
+        </script>
+        </body>
 </html>  
