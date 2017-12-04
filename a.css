@@ -14,7 +14,7 @@ h1,h2,h3,h4,h5,h6{font-weight: normal;}
 .topNavBar nav > ul{    list-style: none;    padding: 0;    margin: 0;}
 .topNavBar nav > ul > li {    float: left;    margin-left: 17px;    margin-right: 17px;    position: relative;}
 .topNavBar nav > ul > li > a {   /*顶部列表样式，低端红色的小条条*/    font-size: 12px;    color: #b7b7b7;    font-weight: bold;    border-top: 3px solid transparent;    border-bottom: 3px solid transparent;    padding-top: 5px;    padding-bottom: 5px;    display: block;}
-.topNavBar nav > ul > li > a:hover::after {    content:'';    display: ruby;    position: absolute;    top: 100%;    left: 0;   width:100%;    background: red;    height:3px;    animation: menuSlide .3s;}
+.topNavBar nav > ul > li > a:hover::after {    content:'';    display: ruby;    position: absolute;    top: 100%;    left: 0;   width:100%;    background: #e6686a;    height:3px;    animation: menuSlide .3s;}
 @keyframes menuSlide{    0%{        width:0;    }100%{        width:100%;    }}
 .topNavBar .submenu{    display: none;    position: absolute;   left: 0;    top:100%;   }
 .topNavBar .submenu.active{    display: block;}
@@ -45,7 +45,7 @@ body> main .downloadResume{font-size: 14px;line-height: 16px;padding: 21px 55px;
 body> main .downloadResume:hover{    box-shadow: 0px 5px 20px 0px rgba(92,92,92,0.2);}
 .selfIntroduction{/*自我介绍部分*/ max-width: 940px;margin-right: auto;margin-left: auto;text-align: center;
     font-family: kai;line-height: 1.8;font-size: 18px;}
-    
+
 section.skills,section.portfolio{max-width: 940px; margin-right: auto;margin-left: auto;margin-top: 60px;}
 section.skills > h2,
 section.portfolio > h2{ /*技能*/text-align: center;font-size: 34px;line-height: 1.2;color: #3d4451;font-weight: 600;}

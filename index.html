@@ -250,6 +250,12 @@ for(let i=0; i<aTags.length;i++){
 }
 
 let aTags = document.querySelectorAll('nav.menu>ul>li>a')
+function animation(time){
+    requestAnimationFrame(animation);
+    TWEEN.update(time);
+}
+requestAnimationFrame(animation);
+
 for(let i=0;i<aTags.length;i++){       //监听
     aTags[i].onclick = function(x){
         x.preventDefault()  //重点！！！阻止默认
@@ -258,10 +264,44 @@ for(let i=0;i<aTags.length;i++){       //监听
         let element= document.querySelector(href)   //得到元素
          //       视口距离   let rect=element.getBoundingClientRect()
         let top= element.offsetTop//距离页面最顶端的距离 而不是窗口顶端
-        window.scrollTo(0,top-80)   //window滑动到窗口下80像素的位置
+       //   以上四句可以写成 let top=document.querySelector(x.currentTarget.getAttribute('href')).offsetTop
 
+     /*  let n=20  //一共动多少次
+       let t=500/n  //多长时间动一次
+       
+       let S=targetTop-currentTop
+       let s=S/n
+       let i=0
+       console.log(distance)
+       console.log(currentTop)
+       console.log(n)
+       console.log(distance)
+       let id=setInterval(()=>{
+        if(i===n){
+               window.clearInterval(id)
+               return
+           }
+           i++
+        window.scrollTo(0,currentTop+s+i)   //window滑动到窗口下80像素的位置
+       },t)*/
+let currentTop=window.scrollY
+let targetTop = top-80
+let s=targetTop-currentTop
+var coords={y:currentTop};
+var t=Math.abs((s/100)*300)
+if(t>500){t=500}  //限定一个最长时间，如果需要滑动的距离很大，用时太长的话
+var tween=new TWEEN.Tween(coords)
+    .to({y:targetTop},t)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(function(){
+        window.scrollTo(0,coords.y)
+    })
+    .start();
     }
 }
+      
+           
+        
         </script>
         </body>
 </html>  
