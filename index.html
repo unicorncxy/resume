@@ -69,7 +69,7 @@
             <div class="mask"></div>
         </div>
         <main>
-            <div id="siteAbout" class="userCard">
+            <div data-x id="siteAbout" class="userCard">
                 <div class="pictureAndText clearfix">
                     <div class="picture">
                         <img src="./img/a.jpg" width= 299px; height= 425px; alt="头像">
@@ -127,7 +127,7 @@
                 </p>
                 
         </main>
-        <section id="siteSkills" class="skills">
+        <section data-x id="siteSkills" class="skills">
             <h2>技能</h2>
             <ol class="clearfix">
                 <li>
@@ -189,7 +189,7 @@
                 
             </ol>
         </section>
-        <section id="siteWorks" class="portfolio" style="padding-top:100px;">
+        <section data-x id="siteWorks" class="portfolio" style="padding-top:100px;">
             <h2>作品集</h2>
             <nav>
                 <ol class="clearfix">
@@ -201,6 +201,7 @@
                     <div class="bar-inner"></div>
                 </div>
             </nav>
+            </section>
 <script>
     portfolio1.onclick=function(){
         portfolioBar.className='bar state-1'
@@ -227,18 +228,51 @@
   </div>
 
         </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.jx/17.1.1/Tween.min.js"></script>
         <script>
         setTimeout(function(){
             siteWelcome.classList.remove('active')
-        },1000)
+        },100)
+//添加  offset 类
 
-    window.onscroll = function(xxxxx){
-    if(window.scrollY>0){
-        topNavBar.classList.add('sticky')
-    }else{
-        topNavBar.classList.remove('sticky')
+let specialTags = document.querySelectorAll('[data-x]')  //给这些特殊标签加上class
+for(let i=0;i<specialTags.length;i++){        
+   specialTags[i].classList.add('offset')   //脱离
+} 
+
+findClosest()
+window.onscroll = function(x){
+if(window.scrollY>0){
+    topNavBar.classList.add('sticky')
+}else{
+    topNavBar.classList.remove('sticky')
     }
-}        
+    findClosest()
+}
+
+
+function findClosest(){
+   //高亮  重点是找元素
+   let specialTags = document.querySelectorAll('[data-x]')  //含有data-x属性的div
+    let minIndex = 0
+    for(let i=1;i<specialTags.length;i++){           //遍历 找到哪个和当前最近 获取它的index
+        if(Math.abs(specialTags[i].offsetTop-window.scrollY)<Math.abs(specialTags[minIndex].offsetTop-window.scrolly)){
+            minIndex = i
+        }
+    } 
+    //minIndex就是离窗口顶部最近的元素
+    specialTags[minIndex].classList.remove('offset')  //去除offset 
+    let id = specialTags[minIndex].id               //获取高亮的id
+    let a=document.querySelector('a[href="#'+  id+ '" ]')
+    let li = a.parentNode               //找爸爸
+    let brothersAndMe = li.parentNode.children         //获取兄弟姐妹  爸爸的儿子们                    
+    for(let i=0; i<brothersAndMe.length;i++){
+        brothersAndMe[i].classList.remove('highlight')   //把所有的高亮去掉
+    }
+    li.classList.add('highlight')    //单独在自己的li上加上高亮
+    }
+
+
 let liTags = document.querySelectorAll('nav.menu>ul>li')  //监听下拉菜单
 for(let i=0; i<aTags.length;i++){
     liTags[i].onmouseenter = function(x){
@@ -296,7 +330,7 @@ var tween=new TWEEN.Tween(coords)
     .onUpdate(function(){
         window.scrollTo(0,coords.y)
     })
-    .start();
+    .start();//开始缓动
     }
 }
       

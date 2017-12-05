@@ -5,6 +5,25 @@ hr{ height: 0;border: none;border-top: 1px solid #dedede;   /*名片的灰白边
 ul,ol{list-style: none;}
 h1,h2,h3,h4,h5,h6{font-weight: normal;}
 .clearfix::after{content: '';display: block;clear: both;}
+[data-x].active{outline: 10px solid red;}
+[data-x].animate{
+    animation: slideUp 0.5s;
+}
+[data-x].offset{
+    transform: translateY(200px);
+}
+[data-x]{
+    transform: translateY(0);
+    transition: all 0.5s;   /*添加一个过渡 所有在0.5s内完成*/
+}
+@keyframes slideUp{
+    0%{
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
 
 /*----------------------------------------以上--------------*/
 
@@ -13,8 +32,9 @@ h1,h2,h3,h4,h5,h6{font-weight: normal;}
 .topNavBar nav{    padding-top: 7px; /*尽量调整到和RS在同一水平线上*/}
 .topNavBar nav > ul{    list-style: none;    padding: 0;    margin: 0;}
 .topNavBar nav > ul > li {    float: left;    margin-left: 17px;    margin-right: 17px;    position: relative;}
-.topNavBar nav > ul > li > a {   /*顶部列表样式，低端红色的小条条*/    font-size: 12px;    color: #b7b7b7;    font-weight: bold;    border-top: 3px solid transparent;    border-bottom: 3px solid transparent;    padding-top: 5px;    padding-bottom: 5px;    display: block;}
-.topNavBar nav > ul > li > a:hover::after {    content:'';    display: ruby;    position: absolute;    top: 100%;    left: 0;   width:100%;    background: #e6686a;    height:3px;    animation: menuSlide .3s;}
+.topNavBar nav > ul > li > a {   /*顶 部列表样式，低端红色的小条条*/    font-size: 12px;    color: #b7b7b7;    font-weight: bold;    border-top: 3px solid transparent;    border-bottom: 3px solid transparent;    padding-top: 5px;    padding-bottom: 5px;    display: block;}
+.topNavBar nav > ul > li.active > a::after ,
+.topNavBar nav > ul > li.highlight > a::after{    content:'';    display: ruby;    position: absolute;    top: 100%;    left: 0;   width:100%;    background: #e6686a;    height:3px;    animation: menuSlide .3s;}
 @keyframes menuSlide{    0%{        width:0;    }100%{        width:100%;    }}
 .topNavBar .submenu{    display: none;    position: absolute;   left: 0;    top:100%;   }
 .topNavBar .submenu.active{    display: block;}
@@ -52,16 +72,17 @@ section.portfolio > h2{ /*技能*/text-align: center;font-size: 34px;line-height
 section.skills h3{ /*技能条里面各项技能*/ font-size: 14px;line-height: 1.1;padding-right: 40px;}
 section.skills>ol{ background-color: white;    padding: 42px 50px 10px ;    box-shadow: 0px 2px 5px 0px rgba(92,92,92,0.5);    margin-top: 30px;}
 section.skills>ol>li{    float: left;    width: 48%;    box-sizing: border-box;}
-section.skills>ol>li:nth-child(even){/*偶数的右侧的右浮*/    float: right;}
-section.skills .progressBar{ /*进度条*/    height: 5px;    background: #fae1e1;    border-radius: 2px;    margin: 4px 0 40px ;}
-section.skills .progressBar .progress{    /*进度条里面的红色填充*/    background: #e6686a;    height: 100%;   /*继承来的高度，后来改的话可以自适应*/    width: 50%;    border-radius: 2px;}
-
-section.portfolio{    text-align: center;    margin-bottom: 100px;}
-section.portfolio>nav{    text-align: center;}
-section.portfolio>nav>ol{    margin:0 auto;display: inline-block;vertical-align: top;}
-section.portfolio>nav>ol>li{    float: left;    margin-left: 40px;    cursor: pointer;}
+section.skills>ol>li:nth-child(even){/*偶数的右侧的右浮*/float: right;}
+section.skills .progressBar{ /*进度条*/height: 5px;background: #fae1e1;border-radius: 2px;margin: 4px 0 40px ;overflow: hidden;}
+section.skills .progressBar .progress{/*进度条里面的红色填充*/background: #e6686a;height: 100%;/*继承来的高度，后来改的话可以自适应*/width: 50%;    border-radius: 2px;
+                                        transform: translateX(0);transition: all 1s;}
+section.skills.offset.progress{transform: translateX(-100%);}/*没滑动到的时候红色能量条全都挤在一起*/
+section.portfolio{text-align: center;    margin-bottom: 100px;}
+section.portfolio>nav{text-align: center;}
+section.portfolio>nav>ol{margin:0 auto;display: inline-block;vertical-align: top;}
+section.portfolio>nav>ol>li{float: left;margin-left: 40px;cursor: pointer;}
 section.portfolio>nav>ol>li:first-child{    /*第一个子元素“所有”前面不要距离，保证精准居中*/    margin-left: 0;}
-section.portfolio >nav{    display: inline-block;    vertical-align: top;    margin-top: 32px;}
+section.portfolio >nav{display: inline-block;vertical-align: top;    margin-top: 32px;}
 section.portfolio>nav.bar{  /* 作品集下面的滑动框框bar*/ height: 5px; background: white; margin-top: 5px;margin-bottom: 28px;border-radius: 2px;}
 section.portfolio>nav.bar-inner{  /* bar里面的红色填充*/ height: 100%;background: #e6686a;border-radius: 2px;transition: all 0.3s;}
 section.portfolio>nav.bar.state-1 .bar-inner{    margin-left: 0;    width:40px;}
